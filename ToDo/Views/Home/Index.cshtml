@@ -8,7 +8,6 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Completed</th>
-
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -19,10 +18,10 @@
                     <th class="todos-column" scope="row">@t.intID</th>
                     <td class="todos-column">@t.Name</td>
                     <td class="todos-column">@t.isComplete</td>
-
                     <td class="buttons-column">
                         <input type="submit" class="btn btn-danger" value="Delete" onClick="deleteTodo(@t.intID)" />
                         <input type="submit" class="btn btn-primary" value="Update" onClick="populateForm(@t.intID)" />
+                        <input type="submit" class="btn btn-primary" value="Complete" onClick="completeTodo(@t.intID)" />
                     </td>
 
                 </tr>

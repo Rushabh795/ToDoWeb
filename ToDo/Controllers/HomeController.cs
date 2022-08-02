@@ -31,7 +31,12 @@ namespace ToDo.Controllers
             var todo = GetById(id);
             return Json(todo);
         }
-
+        [HttpGet]
+        //public JsonResult completeTodo(int id)
+        //{
+        //    var todo = GetById(id);
+        //    return Json(todo);
+        //}
 
         internal ToDoViewModel GetAllTodos()
         {
@@ -43,7 +48,7 @@ namespace ToDo.Controllers
                 {
                     con.Open();
                     tableCmd.CommandText = "SELECT * FROM todo";
-                    
+
                     using (var reader = tableCmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -108,7 +113,7 @@ namespace ToDo.Controllers
             return todo;
         }
 
-        public RedirectResult Insert (ToDoItem todo)
+        public RedirectResult Insert(ToDoItem todo)
         {
             using (SqliteConnection con =
                    new SqliteConnection("Data Source=db.sqlite"))
@@ -145,7 +150,69 @@ namespace ToDo.Controllers
 
             return Json(new { });
         }
+        [HttpPost]
+        public JsonResult completeTodo(int id)
+        {
+            using (SqliteConnection con =
+                   new SqliteConnection("Data Source=db.sqlite"))
+            {
+                using (var tableCmd = con.CreateCommand())
+                {
+                    con.Open();
+                    tableCmd.CommandText = $"UPDATE todo SET isComplete = '{"Yes"}' WHERE Id = '{id}'";
+                    tableCmd.ExecuteNonQuery();
+                }
+            }
+
+            return Json(new { });
+        }
+
+        //public RedirectResult Complete(ToDoItem todo)
+        //{
+        //    using (SqliteConnection con =
+        //           new SqliteConnection("Data Source=db.sqlite"))
+        //    {
+        //        using (var tableCmd = con.CreateCommand())
+        //        {
+        //            con.Open();
+        //            tableCmd.CommandText = $"UPDATE todo SET isComplete = '{"Yes"}' WHERE Id = '{todo.intID}'";
+        //            try
+        //            {
+        //                tableCmd.ExecuteNonQuery();
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Console.WriteLine(ex.Message);
+        //            }
+        //        }
+        //    }
+
+        //    return Redirect("https://localhost:5001/");
+        //}
+        public RedirectResult Update(ToDoItem todo)
+        {
+            using (SqliteConnection con =
+                   new SqliteConnection("Data Source=db.sqlite"))
+            {
+                using (var tableCmd = con.CreateCommand())
+                {
+                    con.Open();
+                    tableCmd.CommandText = $"UPDATE todo SET name = '{todo.Name}' WHERE Id = '{todo.intID}'";
+                    try
+                    {
+                        tableCmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+            return Redirect("https://localhost:5001/");
+        }
 
     }
+
 }
 
