@@ -6,22 +6,26 @@
             <thead>
                 <tr class="table-primary">
                     <th scope="col">Id</th>
-                    <th scope="col">NAME</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Completed</th>
+
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var t in Model.TodoList)
                 {
-                    <tr>
-                        <th class="todos-column" scope="row">@t.intID</th>
-                        <td class="todos-column">@t.Name</td>
-                        <td class="buttons-column">
-                            <input type="submit" class="btn btn-danger" value="Delete" onClick="deleteTodo(@t.intID)" />
-                            <input type="submit" class="btn btn-primary" value="Update" onClick="populateForm(@t.intID)" />
-                        </td>
+                <tr>
+                    <th class="todos-column" scope="row">@t.intID</th>
+                    <td class="todos-column">@t.Name</td>
+                    <td class="todos-column">@t.isComplete</td>
 
-                    </tr>
+                    <td class="buttons-column">
+                        <input type="submit" class="btn btn-danger" value="Delete" onClick="deleteTodo(@t.intID)" />
+                        <input type="submit" class="btn btn-primary" value="Update" onClick="populateForm(@t.intID)" />
+                    </td>
+
+                </tr>
                 }
             </tbody>
         </table>

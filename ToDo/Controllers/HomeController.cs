@@ -54,7 +54,8 @@ namespace ToDo.Controllers
                                     new ToDoItem
                                     {
                                         intID = reader.GetInt32(0),
-                                        Name = reader.GetString(1)
+                                        Name = reader.GetString(1),
+                                        isComplete = reader.GetString(2)
                                     });
                             }
                         }
@@ -94,6 +95,7 @@ namespace ToDo.Controllers
                             reader.Read();
                             todo.intID = reader.GetInt32(0);
                             todo.Name = reader.GetString(1);
+                            todo.isComplete = reader.GetString(2);
                         }
                         else
                         {
@@ -114,7 +116,7 @@ namespace ToDo.Controllers
                 using (var tableCmd = con.CreateCommand())
                 {
                     con.Open();
-                    tableCmd.CommandText = $"INSERT INTO todo (name) VALUES ('{todo.Name}')";
+                    tableCmd.CommandText = $"INSERT INTO todo (name , iscomplete) VALUES ('{todo.Name}','{"No"}')";
                     try
                     {
                         tableCmd.ExecuteNonQuery();
@@ -127,6 +129,23 @@ namespace ToDo.Controllers
             }
             return Redirect("https://localhost:5001/");
         }
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            using (SqliteConnection con =
+                   new SqliteConnection("Data Source=db.sqlite"))
+            {
+                using (var tableCmd = con.CreateCommand())
+                {
+                    con.Open();
+                    tableCmd.CommandText = $"DELETE from todo WHERE Id = '{id}'";
+                    tableCmd.ExecuteNonQuery();
+                }
+            }
+
+            return Json(new { });
+        }
+
     }
 }
 
