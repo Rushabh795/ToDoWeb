@@ -25,13 +25,13 @@ namespace ToDo.Controllers
             return View(todoListViewModel);
         }
 
-        [HttpGet]
-        public JsonResult PopulateForm(int id)
-        {
-            var todo = GetById(id);
-            return Json(todo);
-        }
-        [HttpGet]
+        //[HttpGet]
+        //public JsonResult PopulateForm(int id)
+        //{
+        //    var todo = GetById(id);
+        //    return Json(todo);
+        //}
+        //[HttpGet]
         //public JsonResult completeTodo(int id)
         //{
         //    var todo = GetById(id);
@@ -160,6 +160,7 @@ namespace ToDo.Controllers
                 {
                     con.Open();
                     tableCmd.CommandText = $"UPDATE todo SET isComplete = '{"Yes"}' WHERE Id = '{id}'";
+
                     tableCmd.ExecuteNonQuery();
                 }
             }
@@ -167,7 +168,8 @@ namespace ToDo.Controllers
             return Json(new { });
         }
 
-        //public RedirectResult Complete(ToDoItem todo)
+       
+        //public RedirectResult Update(ToDoItem todo)
         //{
         //    using (SqliteConnection con =
         //           new SqliteConnection("Data Source=db.sqlite"))
@@ -175,7 +177,7 @@ namespace ToDo.Controllers
         //        using (var tableCmd = con.CreateCommand())
         //        {
         //            con.Open();
-        //            tableCmd.CommandText = $"UPDATE todo SET isComplete = '{"Yes"}' WHERE Id = '{todo.intID}'";
+        //            tableCmd.CommandText = $"UPDATE todo SET name = '{todo.Name}' WHERE Id = '{todo.intID}'";
         //            try
         //            {
         //                tableCmd.ExecuteNonQuery();
@@ -189,28 +191,6 @@ namespace ToDo.Controllers
 
         //    return Redirect("https://localhost:5001/");
         //}
-        public RedirectResult Update(ToDoItem todo)
-        {
-            using (SqliteConnection con =
-                   new SqliteConnection("Data Source=db.sqlite"))
-            {
-                using (var tableCmd = con.CreateCommand())
-                {
-                    con.Open();
-                    tableCmd.CommandText = $"UPDATE todo SET name = '{todo.Name}' WHERE Id = '{todo.intID}'";
-                    try
-                    {
-                        tableCmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-            }
-
-            return Redirect("https://localhost:5001/");
-        }
 
     }
 
