@@ -1,9 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "Bx/b4W8WiIKHHYpCcoUUxJfIAq3nApydz5dLgM9IaMEfWOvSfIEHnJS54CnyaThZytVx8HiKnZ7Of9yPabckuQ==",
+  "dgSpecHash": "vrBWy4flf7kNGHNJHuZnf5OLEay53PsSmkntq6M5WUeqg3z2KqFeGfjIhsv/d5fsn5XxLbtyX1/QWAYnO/lEdA==",
   "success": true,
   "projectFilePath": "/Users/rushabhshah/Desktop/WebDevelopment/ToDoWeb/ToDo/ToDo.csproj",
   "expectedPackageFiles": [
+    "/Users/rushabhshah/.nuget/packages/microsoft.data.sqlite/5.0.0/microsoft.data.sqlite.5.0.0.nupkg.sha512",
+    "/Users/rushabhshah/.nuget/packages/microsoft.data.sqlite.core/5.0.0/microsoft.data.sqlite.core.5.0.0.nupkg.sha512",
+    "/Users/rushabhshah/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.0.4/sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
+    "/Users/rushabhshah/.nuget/packages/sqlitepclraw.core/2.0.4/sqlitepclraw.core.2.0.4.nupkg.sha512",
+    "/Users/rushabhshah/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.0.4/sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
+    "/Users/rushabhshah/.nuget/packages/sqlitepclraw.provider.dynamic_cdecl/2.0.4/sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
+    "/Users/rushabhshah/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/rushabhshah/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
     "/Users/rushabhshah/.nuget/packages/microsoft.netcore.app.host.osx-x64/5.0.17/microsoft.netcore.app.host.osx-x64.5.0.17.nupkg.sha512",
     "/Users/rushabhshah/.nuget/packages/microsoft.netcore.app.ref/5.0.0/microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
