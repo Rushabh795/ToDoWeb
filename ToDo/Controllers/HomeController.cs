@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 using ToDo.Models;
+using ToDo.Models.ViewModel;
 
 namespace ToDo.Controllers
 {
@@ -18,20 +19,102 @@ namespace ToDo.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
-            return View();
+            var todoListViewModel = GetAllTodos();
+            return View(todoListViewModel);
         }
-        public void Insert(ToDoItem todoItem)
+
+        [HttpGet]
+        public JsonResult PopulateForm(int id)
         {
+            var todo = GetById(id);
+            return Json(todo);
+        }
+
+
+        internal ToDoViewModel GetAllTodos()
+        {
+            List<ToDoItem> todoList = new();
             using (SqliteConnection con =
-                       new SqliteConnection("Data Source=db.sqlite"))
+                   new SqliteConnection("Data Source=db.sqlite"))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
                     con.Open();
-                    tableCmd.CommandText = $"INSERT INTO todo (name) VALUES ('{todoItem.Name}')";
+                    tableCmd.CommandText = "SELECT * FROM todo";
+                    
+                    using (var reader = tableCmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                todoList.Add(
+                                    new ToDoItem
+                                    {
+                                        intID = reader.GetInt32(0),
+                                        Name = reader.GetString(1)
+                                    });
+                            }
+                        }
+                        else
+                        {
+                            return new ToDoViewModel
+                            {
+                                TodoList = todoList
+                            };
+                        }
+                    };
+                }
+            }
+
+            return new ToDoViewModel
+            {
+                TodoList = todoList
+            };
+        }
+
+        internal ToDoItem GetById(int id)
+        {
+            ToDoItem todo = new();
+
+            using (var connection =
+                   new SqliteConnection("Data Source=db.sqlite"))
+            {
+                using (var tableCmd = connection.CreateCommand())
+                {
+                    connection.Open();
+                    tableCmd.CommandText = $"SELECT * FROM todo Where Id = '{id}'";
+
+                    using (var reader = tableCmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            todo.intID = reader.GetInt32(0);
+                            todo.Name = reader.GetString(1);
+                        }
+                        else
+                        {
+                            return todo;
+                        }
+                    };
+                }
+            }
+
+            return todo;
+        }
+
+        public RedirectResult Insert (ToDoItem todo)
+        {
+            using (SqliteConnection con =
+                   new SqliteConnection("Data Source=db.sqlite"))
+            {
+                using (var tableCmd = con.CreateCommand())
+                {
+                    con.Open();
+                    tableCmd.CommandText = $"INSERT INTO todo (name) VALUES ('{todo.Name}')";
                     try
                     {
                         tableCmd.ExecuteNonQuery();
@@ -42,8 +125,8 @@ namespace ToDo.Controllers
                     }
                 }
             }
+            return Redirect("https://localhost:5001/");
         }
     }
-    
 }
 

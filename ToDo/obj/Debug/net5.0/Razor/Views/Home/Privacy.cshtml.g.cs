@@ -26,8 +26,15 @@ using ToDo.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "/Users/rushabhshah/Desktop/WebDevelopment/ToDoWeb/ToDo/Views/_ViewImports.cshtml"
+using ToDo.Models.ViewModel;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"12dc26fadc19d84d50c720b0d4f01e7598e6f3e2", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ccc0b8c6c7bd4321e8d9d29abb2892beaaf161bb", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3adc231ee653ea6398adb0484ec0db9462fcff5e", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
