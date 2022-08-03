@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+//heres the fuction of delete action which is used via java script 
 function deleteTodo(i) {
     $.ajax({
         url: 'Home/Delete',
@@ -34,6 +35,7 @@ function deleteTodo(i) {
 //    });
 //}
 
+//heres the fuction of Todo is Complete or not action which is used via java script
 function completeTodo(i) {
     $.ajax({
         url: 'Home/completeTodo',

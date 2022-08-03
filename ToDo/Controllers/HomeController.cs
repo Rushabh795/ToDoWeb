@@ -19,6 +19,7 @@ namespace ToDo.Controllers
         {
             _logger = logger;
         }
+        //at the initial stage all todoes get from this method 
         public IActionResult Index()
         {
             var todoListViewModel = GetAllTodos();
@@ -38,6 +39,8 @@ namespace ToDo.Controllers
         //    return Json(todo);
         //}
 
+
+        //this methods has all the operation of database 
         internal ToDoViewModel GetAllTodos()
         {
             List<ToDoItem> todoList = new();
@@ -81,6 +84,7 @@ namespace ToDo.Controllers
             };
         }
 
+        //get all todoes by ID
         internal ToDoItem GetById(int id)
         {
             ToDoItem todo = new();
@@ -112,7 +116,7 @@ namespace ToDo.Controllers
 
             return todo;
         }
-
+        //this method is udes to insert new Todo
         public RedirectResult Insert(ToDoItem todo)
         {
             using (SqliteConnection con =
@@ -134,6 +138,7 @@ namespace ToDo.Controllers
             }
             return Redirect("https://localhost:5001/");
         }
+        //Delete the todo by ID 
         [HttpPost]
         public JsonResult Delete(int id)
         {
@@ -150,6 +155,7 @@ namespace ToDo.Controllers
 
             return Json(new { });
         }
+        //Change the status of todo is completed or not
         [HttpPost]
         public JsonResult completeTodo(int id)
         {
